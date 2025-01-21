@@ -265,7 +265,7 @@ rules:
     languages:
       - go
 
-  - id: cookie-missing-httponly
+  - id: go.lang.security.audit.net.cookie-missing-httponly.cookie-missing-httponly
     patterns:
       - pattern-not-inside: |
           http.Cookie{
