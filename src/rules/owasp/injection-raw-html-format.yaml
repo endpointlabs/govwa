@@ -56,3 +56,334 @@ rules:
               metavariable: $HTMLSTR
               language: generic
               pattern: <$TAG ...
+  - id: session-cookie-missing-secure
+    patterns:
+      - pattern-not-inside: |
+          &sessions.Options{
+            ...,
+            Secure: true,
+            ...,
+          }
+      - pattern: |
+          &sessions.Options{
+            ...,
+          }
+    message: A session cookie was detected without setting the 'Secure' flag. The
+      'secure' flag for cookies prevents the client from transmitting the cookie
+      over insecure channels such as HTTP. Set the 'Secure' flag by setting
+      'Secure' to 'true' in the Options struct.
+    metadata:
+      cwe:
+        - "CWE-614: Sensitive Cookie in HTTPS Session Without 'Secure' Attribute"
+      owasp:
+        - A05:2021 - Security Misconfiguration
+      references:
+        - https://github.com/0c34/govwa/blob/139693e56406b5684d2a6ae22c0af90717e149b8/user/session/session.go#L69
+      category: security
+      technology:
+        - gorilla
+      confidence: MEDIUM
+      subcategory:
+        - audit
+      likelihood: LOW
+      impact: LOW
+      license: Semgrep Rules License v1.0. For more details, visit
+        semgrep.dev/legal/rules-license
+      vulnerability_class:
+        - Cookie Security
+    fix-regex:
+      regex: (Secure\s*:\s+)false
+      replacement: \1true
+    severity: WARNING
+    languages:
+      - go
+  - id: session-cookie-samesitenone
+      patterns:
+          - pattern-inside: |
+        &sessions.Options{
+          ...,
+          SameSite: http.SameSiteNoneMode,
+          ...,
+        }
+            - pattern: |
+                &sessions.Options{
+                  ...,
+                }
+      message: Found SameSiteNoneMode setting in Gorilla session options. Consider
+        setting SameSite to Lax, Strict or Default for enhanced security.
+      metadata:
+        cwe:
+          - "CWE-1275: Sensitive Cookie with Improper SameSite Attribute"
+        owasp:
+          - A05:2021 - Security Misconfiguration
+        references:
+          - https://pkg.go.dev/github.com/gorilla/sessions#Options
+        category: security
+        technology:
+          - gorilla
+        confidence: MEDIUM
+        subcategory:
+          - audit
+        likelihood: LOW
+        impact: LOW
+        license: Semgrep Rules License v1.0. For more details, visit
+          semgrep.dev/legal/rules-license
+        vulnerability_class:
+          - Cookie Security
+      fix-regex:
+        regex: (SameSite\s*:\s+)http.SameSiteNoneMode
+        replacement: \1http.SameSiteDefaultMode
+      severity: WARNING
+      languages:
+        - go
+
+  - id: session-cookie-samesitenone
+      patterns:
+          - pattern-inside: |
+        &sessions.Options{
+          ...,
+          SameSite: http.SameSiteNoneMode,
+          ...,
+        }
+            - pattern: |
+                &sessions.Options{
+                  ...,
+                }
+      message: Found SameSiteNoneMode setting in Gorilla session options. Consider
+        setting SameSite to Lax, Strict or Default for enhanced security.
+      metadata:
+        cwe:
+          - "CWE-1275: Sensitive Cookie with Improper SameSite Attribute"
+        owasp:
+          - A05:2021 - Security Misconfiguration
+        references:
+          - https://pkg.go.dev/github.com/gorilla/sessions#Options
+        category: security
+        technology:
+          - gorilla
+        confidence: MEDIUM
+        subcategory:
+          - audit
+        likelihood: LOW
+        impact: LOW
+        license: Semgrep Rules License v1.0. For more details, visit
+          semgrep.dev/legal/rules-license
+        vulnerability_class:
+          - Cookie Security
+      fix-regex:
+        regex: (SameSite\s*:\s+)http.SameSiteNoneMode
+        replacement: \1http.SameSiteDefaultMode
+      severity: WARNING
+      languages:
+        - go
+
+  - id: session-cookie-samesitenone
+    patterns:
+      - pattern-inside: |
+          &sessions.Options{
+            ...,
+            SameSite: http.SameSiteNoneMode,
+            ...,
+          }
+      - pattern: |
+          &sessions.Options{
+            ...,
+          }
+    message: Found SameSiteNoneMode setting in Gorilla session options. Consider
+      setting SameSite to Lax, Strict or Default for enhanced security.
+    metadata:
+      cwe:
+        - "CWE-1275: Sensitive Cookie with Improper SameSite Attribute"
+      owasp:
+        - A05:2021 - Security Misconfiguration
+      references:
+        - https://pkg.go.dev/github.com/gorilla/sessions#Options
+      category: security
+      technology:
+        - gorilla
+      confidence: MEDIUM
+      subcategory:
+        - audit
+      likelihood: LOW
+      impact: LOW
+      license: Semgrep Rules License v1.0. For more details, visit
+        semgrep.dev/legal/rules-license
+      vulnerability_class:
+        - Cookie Security
+    fix-regex:
+      regex: (SameSite\s*:\s+)http.SameSiteNoneMode
+      replacement: \1http.SameSiteDefaultMode
+    severity: WARNING
+    languages:
+      - go
+
+  - id: session-cookie-missing-secure
+    patterns:
+      - pattern-not-inside: |
+          &sessions.Options{
+            ...,
+            Secure: true,
+            ...,
+          }
+      - pattern: |
+          &sessions.Options{
+            ...,
+          }
+    message: A session cookie was detected without setting the 'Secure' flag. The
+      'secure' flag for cookies prevents the client from transmitting the cookie
+      over insecure channels such as HTTP. Set the 'Secure' flag by setting
+      'Secure' to 'true' in the Options struct.
+    metadata:
+      cwe:
+        - "CWE-614: Sensitive Cookie in HTTPS Session Without 'Secure' Attribute"
+      owasp:
+        - A05:2021 - Security Misconfiguration
+      references:
+        - https://github.com/0c34/govwa/blob/139693e56406b5684d2a6ae22c0af90717e149b8/user/session/session.go#L69
+      category: security
+      technology:
+        - gorilla
+      confidence: MEDIUM
+      subcategory:
+        - audit
+      likelihood: LOW
+      impact: LOW
+      license: Semgrep Rules License v1.0. For more details, visit
+        semgrep.dev/legal/rules-license
+      vulnerability_class:
+        - Cookie Security
+    fix-regex:
+      regex: (Secure\s*:\s+)false
+      replacement: \1true
+    severity: WARNING
+    languages:
+      - go
+
+  - id: session-cookie-missing-httponly
+    patterns:
+      - pattern-not-inside: |
+          &sessions.Options{
+            ...,
+            HttpOnly: true,
+            ...,
+          }
+      - pattern: |
+          &sessions.Options{
+            ...,
+          }
+    message: A session cookie was detected without setting the 'HttpOnly' flag. The
+      'HttpOnly' flag for cookies instructs the browser to forbid client-side
+      scripts from reading the cookie which mitigates XSS attacks. Set the
+      'HttpOnly' flag by setting 'HttpOnly' to 'true' in the Options struct.
+    metadata:
+      cwe:
+        - "CWE-1004: Sensitive Cookie Without 'HttpOnly' Flag"
+      owasp:
+        - A05:2021 - Security Misconfiguration
+      references:
+        - https://github.com/0c34/govwa/blob/139693e56406b5684d2a6ae22c0af90717e149b8/user/session/session.go#L69
+      category: security
+      technology:
+        - gorilla
+      confidence: MEDIUM
+      subcategory:
+        - audit
+      likelihood: LOW
+      impact: LOW
+      license: Semgrep Rules License v1.0. For more details, visit
+        semgrep.dev/legal/rules-license
+      vulnerability_class:
+        - Cookie Security
+    fix-regex:
+      regex: (HttpOnly\s*:\s+)false
+      replacement: \1true
+    severity: WARNING
+    languages:
+      - go
+
+  - id: cookie-missing-secure
+    patterns:
+      - pattern-not-inside: |
+          http.Cookie{
+            ...,
+            Secure: true,
+            ...,
+          }
+      - pattern: |
+          http.Cookie{
+            ...,
+          }
+    message: A session cookie was detected without setting the 'Secure' flag. The
+      'secure' flag for cookies prevents the client from transmitting the cookie
+      over insecure channels such as HTTP. Set the 'Secure' flag by setting
+      'Secure' to 'true' in the Options struct.
+    metadata:
+      cwe:
+        - "CWE-614: Sensitive Cookie in HTTPS Session Without 'Secure' Attribute"
+      owasp:
+        - A05:2021 - Security Misconfiguration
+      references:
+        - https://github.com/0c34/govwa/blob/139693e56406b5684d2a6ae22c0af90717e149b8/util/cookie.go
+        - https://golang.org/src/net/http/cookie.go
+      category: security
+      technology:
+        - go
+      confidence: MEDIUM
+      subcategory:
+        - vuln
+      likelihood: LOW
+      impact: LOW
+      license: Semgrep Rules License v1.0. For more details, visit
+        semgrep.dev/legal/rules-license
+      vulnerability_class:
+        - Cookie Security
+    fix-regex:
+      regex: (Secure\s*:\s+)false
+      replacement: \1true
+    severity: WARNING
+    languages:
+      - go
+
+  - id: cookie-missing-httponly
+    patterns:
+      - pattern-not-inside: |
+          http.Cookie{
+            ...,
+            HttpOnly: true,
+            ...,
+          }
+      - pattern: |
+          http.Cookie{
+            ...,
+          }
+    message: A session cookie was detected without setting the 'HttpOnly' flag. The
+      'HttpOnly' flag for cookies instructs the browser to forbid client-side
+      scripts from reading the cookie which mitigates XSS attacks. Set the
+      'HttpOnly' flag by setting 'HttpOnly' to 'true' in the Cookie.
+    metadata:
+      cwe:
+        - "CWE-1004: Sensitive Cookie Without 'HttpOnly' Flag"
+      owasp:
+        - A05:2021 - Security Misconfiguration
+      references:
+        - https://github.com/0c34/govwa/blob/139693e56406b5684d2a6ae22c0af90717e149b8/util/cookie.go
+        - https://golang.org/src/net/http/cookie.go
+      category: security
+      technology:
+        - go
+      confidence: MEDIUM
+      subcategory:
+        - vuln
+      likelihood: LOW
+      impact: LOW
+      license: Semgrep Rules License v1.0. For more details, visit
+        semgrep.dev/legal/rules-license
+      vulnerability_class:
+        - Cookie Security
+    fix-regex:
+      regex: (HttpOnly\s*:\s+)false
+      replacement: \1true
+    severity: WARNING
+    languages:
+      - go
+
